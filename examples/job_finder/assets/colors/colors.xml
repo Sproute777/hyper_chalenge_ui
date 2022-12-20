@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+    <color name="paperWhite">#fcfcfd</color>
+    <color name="grey">#60778C</color>
+    <color name="black">#000000</color>
+    <color name="deepInk">#0D0140</color>
+    <color name="lighInk">#524B6B</color>
+    <color name="indigo">#130160</color>
+    <color name="lightPurple">#D6CDFE</color>
+    <color name="orange">#FCA34D</color>
+    <color name="inkOrange">#FF9228</color>
+    <!-- <color name="black">#000000</color> -->
+    <!-- <color name="gray_70">#EEEEEE</color> -->
+    <!-- <color name="gray_410">#979797</color> -->
+</resources>
