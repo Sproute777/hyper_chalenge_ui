@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:job_finder/app/app_multi_bloc.dart';
+import '/shared/app_multi_bloc.dart';
 
 import 'app_view.dart';
 

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:formz/formz.dart';
-import 'package:job_finder/app/gen/assets.gen.dart';
-import 'package:job_finder/app/gen/colors.gen.dart';
+import 'package:job_finder/shared/extenstion.dart';
+import 'package:job_finder/shared/gen/colors.gen.dart';
+import '/shared/gen/assets.gen.dart';
 import 'package:job_finder/features/auth/domain/repositories/user_repository.dart';
 import 'package:job_finder/features/login/domain/bloc/login_bloc.dart';
 
@@ -24,14 +25,13 @@ class _LoginView extends StatelessWidget {
   const _LoginView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final typography = Theme.of(context).typography;
     return Scaffold(
       backgroundColor: AppColors.paperWhite,
       body: SafeArea(
         child: Column(children: <Widget>[
           Text(
             'Welcome Back',
-            style: typography.black.headlineSmall,
+            style: context.h1?.apply(color: AppColors.titleBlack),
           ),
           Text(
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',

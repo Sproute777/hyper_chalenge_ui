@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:job_finder/app/gen/assets.gen.dart';
-import 'package:job_finder/app/gen/colors.gen.dart';
-import 'package:job_finder/app/router/routes/app_routes.dart';
+
+import '/shared/extenstion.dart';
+import '/shared/gen/assets.gen.dart';
+import '/shared/gen/colors.gen.dart';
+import '/shared/router/routes/app_routes.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final typography = Theme.of(context).typography;
 
     return Scaffold(
       body: SafeArea(
@@ -20,7 +21,7 @@ class SplashScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 50, right: 32),
                   alignment: Alignment.centerRight,
                   child: Text('Jobspot',
-                      style: typography.black.headlineSmall /* 23 */)),
+                      style: context.h4?.apply(color: AppColors.black) )),
               Expanded(
                 child: SvgPicture.asset(Assets.images.splashIntro.path),
               ),
@@ -33,14 +34,14 @@ class SplashScreen extends StatelessWidget {
                     children: [
                       Text(
                         'Find Your',
-                        style: typography.black.displayMedium,
+                        style: context.displaySmall?.apply(color: Colors.black),
                       ),
                       Text('Dream Job',
-                          style: typography.black.displayMedium?.apply(
+                          style: context.displaySmall?.apply(
                             decoration: TextDecoration.underline,
                             color: AppColors.orange,
                           )),
-                      Text('Here!', style: typography.black.displayMedium),
+                      Text('Here!', style: context.displaySmall?.apply(color: Colors.black)),
                     ]),
               ),
               const SizedBox(
@@ -51,7 +52,7 @@ class SplashScreen extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'Explore all the most exciting job roles based\non your interest and study major.',
-                  style: typography.black.bodySmall,
+                  style: context.bodyMedium?.apply(color: AppColors.lighInk),
                 ),
               ),
               Container(
