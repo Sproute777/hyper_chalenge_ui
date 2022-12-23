@@ -14,9 +14,17 @@ import 'package:flutter/services.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/check_your_email.svg
+  SvgGenImage get checkYourEmail =>
+      const SvgGenImage('assets/images/check_your_email.svg');
+
   /// File path: assets/images/circle_arrow.svg
   SvgGenImage get circleArrow =>
       const SvgGenImage('assets/images/circle_arrow.svg');
+
+  /// File path: assets/images/forgot_password.svg
+  SvgGenImage get forgotPassword =>
+      const SvgGenImage('assets/images/forgot_password.svg');
 
   /// File path: assets/images/hidden.svg
   SvgGenImage get hidden => const SvgGenImage('assets/images/hidden.svg');
@@ -28,8 +36,20 @@ class $AssetsImagesGen {
   SvgGenImage get splashIntro =>
       const SvgGenImage('assets/images/splash_intro.svg');
 
+  /// File path: assets/images/successfully.svg
+  SvgGenImage get successfully =>
+      const SvgGenImage('assets/images/successfully.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [circleArrow, hidden, showed, splashIntro];
+  List<SvgGenImage> get values => [
+        checkYourEmail,
+        circleArrow,
+        forgotPassword,
+        hidden,
+        showed,
+        splashIntro,
+        successfully
+      ];
 }
 
 class Assets {

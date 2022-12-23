@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
@@ -8,8 +7,8 @@ import 'package:job_finder/shared/theme/colors.dart';
 import 'package:job_finder/features/auth/domain/repositories/user_repository.dart';
 import 'package:job_finder/features/login/domain/bloc/login_bloc.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatelessWidget {
+  const SignupScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +35,9 @@ class _LoginView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // const SizedBox(height: 80),
                 Center(
                   child: Text(
-                    'Welcome Back',
+                    'Create an Account',
                     style: context.h1?.apply(color: AppColors.textTitle),
                   ),
                 ),
@@ -53,6 +51,10 @@ class _LoginView extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 54),
+               Text(
+                  'user name',
+                  style: context.titleSmall?.apply(color: AppColors.textTitle),
+                ),
                 Text(
                   'email',
                   style: context.titleSmall?.apply(color: AppColors.textTitle),
@@ -94,7 +96,7 @@ class _LoginView extends StatelessWidget {
                       ],
                     ),
                     GestureDetector(
-                      onTap: ()=> const ForgotPasswordRoute().go(context),
+                      onTap:() => const ForgotPasswordRoute().go(context),
                       child: Text(
                         'Forgot Password ?',
                         style:
@@ -115,26 +117,7 @@ class _LoginView extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    RichText(
-                      text: TextSpan(
-                          text: 'You don\'t have an account yet?  ',
-                          style: context.bodySmall
-                              ?.apply(color: AppColors.textBody),
-                          children: <TextSpan>[
-                            TextSpan(
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () => const SignupRoute().go(context),
-                              text: 'Sign up',
-                              style: context.bodySmall
-                                  ?.apply(color: AppColors.textOrange),
-                            )
-                          ]),
-                    ),
-                  ],
-                ),
+               
               ],
             ),
           ),
@@ -245,7 +228,7 @@ class _LoginButton extends StatelessWidget {
                 //     context.read<LoginBloc>().add(const LoginSubmitted());
                 //   }
                 // : null,
-                child: const Text('LOGIN'),
+                child: const Text('SIGN UP'),
               ),);
       },
     );
