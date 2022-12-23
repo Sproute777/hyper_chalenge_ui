@@ -83,13 +83,13 @@ flutter_gen:
   fonts:
     enabled: true
 
-  colors:
-    outputs:
-      package_parameter_enabled: true
-      class_name: AppColors
-    enabled: true
-    inputs:
-      - assets/colors/colors.xml
+  # colors:
+  #   outputs:
+  #     package_parameter_enabled: true
+  #     class_name: AppColors
+  #   enabled: true
+  #   inputs:
+  #     - assets/colors/colors.xml
 
 
 flutter:
