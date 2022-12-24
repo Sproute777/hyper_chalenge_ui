@@ -2,11 +2,14 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+import 'package:job_finder/features/login/view/widgets/google_button.dart';
+import 'package:job_finder/features/login/view/widgets/submitted_button.dart';
 import 'package:job_finder/shared/extenstion.dart';
 import 'package:job_finder/shared/router/routes/app_routes.dart';
 import 'package:job_finder/shared/theme/colors.dart';
 import 'package:job_finder/features/auth/domain/repositories/user_repository.dart';
 import 'package:job_finder/features/login/domain/bloc/login_bloc.dart';
+
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -46,10 +49,12 @@ class _LoginView extends StatelessWidget {
                 const SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-                    textAlign: TextAlign.center,
-                    style: context.bodySmall?.apply(color: AppColors.textBody),
+                  child: Center(
+                    child: Text(
+                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+                      textAlign: TextAlign.center,
+                      style: context.bodySmall?.apply(color: AppColors.textBody),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 54),
@@ -94,7 +99,7 @@ class _LoginView extends StatelessWidget {
                       ],
                     ),
                     GestureDetector(
-                      onTap: ()=> const ForgotPasswordRoute().go(context),
+                      onTap: ()=> const CheckYourEmailRoute().go(context),
                       child: Text(
                         'Forgot Password ?',
                         style:
@@ -107,10 +112,10 @@ class _LoginView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Column(
-                    children: [
-                      _LoginButton(),
-                      const SizedBox(height: 19),
-                      _LoginButton(),
+                    children: const <Widget>[
+                       _LoginButton(),
+                       SizedBox(height: 19),
+                      _GoogleSigninButton(),
                     ],
                   ),
                 ),
@@ -146,6 +151,33 @@ const Spacer()
   }
 }
 
+class _LoginButton extends StatelessWidget {
+  const _LoginButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<LoginBloc, LoginState>(
+        buildWhen: (previous, current) =>
+            previous.status != current.status,
+        builder: (context, state) {
+          return SubmittedButton(
+              title: 'LOGIN',
+              onTap:
+               state.status.isValidated
+                  ? () {
+                      context
+                          .read<LoginBloc>()
+                          .add(const LoginSubmitted());
+                    }
+                  : null,
+              isLoading: state.status.isSubmissionInProgress);
+        }
+    );
+  }
+}
+
 class _EmailInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -170,7 +202,7 @@ class _EmailInput extends StatelessWidget {
             decoration: InputDecoration(
               fillColor: AppColors.white,
               filled: true,
-              constraints: const BoxConstraints(maxHeight: 50),
+              constraints: const BoxConstraints(minHeight: 50),
               border: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.all(Radius.circular(8.0))),
@@ -207,7 +239,7 @@ class _PasswordInput extends StatelessWidget {
             decoration: InputDecoration(
               fillColor: AppColors.white,
               filled: true,
-              constraints: const BoxConstraints(maxHeight: 50),
+              constraints: const BoxConstraints(minHeight: 50),
               border: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.all(Radius.circular(8.0))),
@@ -224,30 +256,10 @@ class _PasswordInput extends StatelessWidget {
   }
 }
 
-class _LoginButton extends StatelessWidget {
+class _GoogleSigninButton extends StatelessWidget {
+  const _GoogleSigninButton({Key? key}): super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(
-      buildWhen: (previous, current) => previous.status != current.status,
-      builder: (context, state) {
-        return SizedBox(height: 50 , child :state.status.isSubmissionInProgress
-            ? const CircularProgressIndicator()
-            : TextButton(
-                style: TextButton.styleFrom(
-                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                    foregroundColor: Colors.white,
-                    backgroundColor: AppColors.buttonBlue,
-                    minimumSize: Size(MediaQuery.of(context).size.width, 50)
-                    ),
-                onPressed: () {},
-                // state.status.isValidated
-                // ? () {
-                //     context.read<LoginBloc>().add(const LoginSubmitted());
-                //   }
-                // : null,
-                child: const Text('LOGIN'),
-              ),);
-      },
-    );
-  }
+       return GoogleButton(onTap: (){} ,title:'SIGN IN WITH GOOGLE');
+       }
 }

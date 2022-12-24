@@ -1,7 +1,7 @@
 part of 'app_routes.dart';
 
 @TypedGoRoute<ForgotPasswordRoute>(
-  path: '/forgot_password',
+  path: '/forgot-password',
 )
 class ForgotPasswordRoute extends GoRouteData {
   const ForgotPasswordRoute();

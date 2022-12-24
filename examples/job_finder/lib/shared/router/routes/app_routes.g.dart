@@ -12,6 +12,7 @@ List<GoRoute> get $appRoutes => [
       $loginRoute,
       $signupRoute,
       $forgotPasswordRoute,
+      $checkYourEmailRoute,
       $successfullyRoute,
     ];
 
@@ -89,7 +90,7 @@ extension $SignupRouteExtension on SignupRoute {
 }
 
 GoRoute get $forgotPasswordRoute => GoRouteData.$route(
-      path: '/forgot_password',
+      path: '/forgot-password',
       factory: $ForgotPasswordRouteExtension._fromState,
     );
 
@@ -98,7 +99,25 @@ extension $ForgotPasswordRouteExtension on ForgotPasswordRoute {
       const ForgotPasswordRoute();
 
   String get location => GoRouteData.$location(
-        '/forgot_password',
+        '/forgot-password',
+      );
+
+  void go(BuildContext context) => context.go(location, extra: this);
+
+  void push(BuildContext context) => context.push(location, extra: this);
+}
+
+GoRoute get $checkYourEmailRoute => GoRouteData.$route(
+      path: '/check-your-email',
+      factory: $CheckYourEmailRouteExtension._fromState,
+    );
+
+extension $CheckYourEmailRouteExtension on CheckYourEmailRoute {
+  static CheckYourEmailRoute _fromState(GoRouterState state) =>
+      const CheckYourEmailRoute();
+
+  String get location => GoRouteData.$location(
+        '/check-your-email',
       );
 
   void go(BuildContext context) => context.go(location, extra: this);

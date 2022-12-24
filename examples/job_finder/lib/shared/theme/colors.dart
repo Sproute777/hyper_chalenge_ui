@@ -30,6 +30,12 @@ class AppColors {
  /// Color #E6E1FF 
   static const Color checkbox = Color(0xFFE6E1FF);
 
+   /// Color: #130160
+  static const Color buttonBlue = Color(0xFF130160);
+   /// Color: #D6CDFE
+  static const Color buttonPurpleLight = Color(0xFFD6CDFE);
+
+
 
   /// Color: #0D0140
   static const Color deepInk = Color(0xFF0D0140);
@@ -37,17 +43,11 @@ class AppColors {
   /// Color: #60778C
   static const Color grey = Color(0xFF60778C);
 
-  /// Color: #130160
-  static const Color buttonBlue = Color(0xFF130160);
-
   /// Color: #FF9228
   static const Color inkOrange = Color(0xFFFF9228);
 
   /// Color: #524B6B
   static const Color lighInk = Color(0xFF524B6B);
-
-   /// Color: #D6CDFE
-  static const Color lightPurple = Color(0xFFD6CDFE);
 
   /// Color: #fcfcfd
   static const Color paperWhite = Color(0xFFFCFCFD);

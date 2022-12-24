@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:formz/formz.dart';
 import 'package:job_finder/app/gen/assets.gen.dart';
 import 'package:job_finder/shared/extenstion.dart';
+import 'package:job_finder/shared/router/routes/app_routes.dart';
 import 'package:job_finder/shared/theme/colors.dart';
 import 'package:job_finder/features/auth/domain/repositories/user_repository.dart';
 import 'package:job_finder/features/login/domain/bloc/login_bloc.dart';
@@ -68,15 +68,15 @@ class _ForgotPasswordView extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   _EmailInput(),
-                  const SizedBox(height: 36),
+                  const SizedBox(height: 29),
                   Column(
                     children: [
-                      _LoginButton(),
-                      const SizedBox(height: 19),
-                      _LoginButton(),
+                      _ResetPasswordButton(),
+                      const SizedBox(height: 29),
+                      _BackToLoginButton(),
                     ],
                   ),
-                  const SizedBox(height: 16),
+                  // const SizedBox(height: 16),
                 ],
               ),
             ),
@@ -112,7 +112,7 @@ class _EmailInput extends StatelessWidget {
             decoration: InputDecoration(
               fillColor: AppColors.white,
               filled: true,
-              constraints: const BoxConstraints(maxHeight: 50),
+              constraints: const BoxConstraints(minHeight: 50),
               border: const OutlineInputBorder(
                   borderSide: BorderSide.none,
                   borderRadius: BorderRadius.all(Radius.circular(8.0))),
@@ -125,33 +125,40 @@ class _EmailInput extends StatelessWidget {
   }
 }
 
-class _LoginButton extends StatelessWidget {
+class _ResetPasswordButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(
-      buildWhen: (previous, current) => previous.status != current.status,
-      builder: (context, state) {
-        return SizedBox(
-          height: 50,
-          child: state.status.isSubmissionInProgress
-              ? const CircularProgressIndicator()
-              : TextButton(
-                  style: TextButton.styleFrom(
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                      foregroundColor: Colors.white,
-                      backgroundColor: AppColors.buttonBlue,
-                      minimumSize: Size(MediaQuery.of(context).size.width, 50)),
-                  onPressed: () {},
-                  // state.status.isValidated
-                  // ? () {
-                  //     context.read<LoginBloc>().add(const LoginSubmitted());
-                  //   }
-                  // : null,
-                  child: const Text('SIGN UP'),
-                ),
-        );
-      },
+    return SizedBox(
+      height: 50,
+      child: TextButton(
+        style: TextButton.styleFrom(
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5.0))),
+            foregroundColor: Colors.white,
+            backgroundColor: AppColors.buttonBlue,
+            minimumSize: Size(MediaQuery.of(context).size.width, 50)),
+        onPressed: () {},
+        child: const Text('RESET PASSWORD'),
+      ),
+    );
+  }
+}
+
+class _BackToLoginButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 50,
+      child: TextButton(
+        style: TextButton.styleFrom(
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5.0))),
+            foregroundColor: AppColors.buttonBlue,
+            backgroundColor: AppColors.buttonPurpleLight,
+            minimumSize: Size(MediaQuery.of(context).size.width, 50)),
+        onPressed: () => const LoginRoute().go(context),
+        child: const Text('BACK TO LOGIN'),
+      ),
     );
   }
 }

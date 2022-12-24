@@ -26,6 +26,9 @@ class $AssetsImagesGen {
   SvgGenImage get forgotPassword =>
       const SvgGenImage('assets/images/forgot_password.svg');
 
+  /// File path: assets/images/google.png
+  AssetGenImage get google => const AssetGenImage('assets/images/google.png');
+
   /// File path: assets/images/hidden.svg
   SvgGenImage get hidden => const SvgGenImage('assets/images/hidden.svg');
 
@@ -41,10 +44,11 @@ class $AssetsImagesGen {
       const SvgGenImage('assets/images/successfully.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [
+  List<dynamic> get values => [
         checkYourEmail,
         circleArrow,
         forgotPassword,
+        google,
         hidden,
         showed,
         splashIntro,

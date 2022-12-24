@@ -7,6 +7,9 @@ import 'package:job_finder/shared/theme/colors.dart';
 import 'package:job_finder/features/auth/domain/repositories/user_repository.dart';
 import 'package:job_finder/features/login/domain/bloc/login_bloc.dart';
 
+import '../widgets/google_button.dart';
+import '../widgets/submitted_button.dart';
+
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
 
@@ -44,10 +47,12 @@ class _LoginView extends StatelessWidget {
                 const SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
-                    textAlign: TextAlign.center,
-                    style: context.bodySmall?.apply(color: AppColors.textBody),
+                  child: Center(
+                    child: Text(
+                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor',
+                      textAlign: TextAlign.center,
+                      style: context.bodySmall?.apply(color: AppColors.textBody),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 54),
@@ -55,6 +60,9 @@ class _LoginView extends StatelessWidget {
                   'user name',
                   style: context.titleSmall?.apply(color: AppColors.textTitle),
                 ),
+                const SizedBox(height: 10),
+                _EmailInput(),
+                const SizedBox(height: 15),
                 Text(
                   'email',
                   style: context.titleSmall?.apply(color: AppColors.textTitle),
@@ -109,10 +117,10 @@ class _LoginView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Column(
-                    children: [
-                      _LoginButton(),
-                      const SizedBox(height: 19),
-                      _LoginButton(),
+                    children:const<Widget> [
+                      _SignupButton(),
+                       SizedBox(height: 19),
+                       _GoogleSignupButton(),
                     ],
                   ),
                 ),
@@ -207,30 +215,39 @@ class _PasswordInput extends StatelessWidget {
   }
 }
 
-class _LoginButton extends StatelessWidget {
+class _SignupButton extends StatelessWidget {
+  const _SignupButton({
+    Key? key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
-      buildWhen: (previous, current) => previous.status != current.status,
-      builder: (context, state) {
-        return SizedBox(height: 50 , child :state.status.isSubmissionInProgress
-            ? const CircularProgressIndicator()
-            : TextButton(
-                style: TextButton.styleFrom(
-                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                    foregroundColor: Colors.white,
-                    backgroundColor: AppColors.buttonBlue,
-                    minimumSize: Size(MediaQuery.of(context).size.width, 50)
-                    ),
-                onPressed: () {},
-                // state.status.isValidated
-                // ? () {
-                //     context.read<LoginBloc>().add(const LoginSubmitted());
-                //   }
-                // : null,
-                child: const Text('SIGN UP'),
-              ),);
-      },
+        buildWhen: (previous, current) =>
+            previous.status != current.status,
+        builder: (context, state) {
+          return SubmittedButton(
+              title: 'SIGN UP',
+              onTap:
+               state.status.isValidated
+                  ? () {
+                      context
+                          .read<LoginBloc>()
+                          .add(const LoginSubmitted());
+                    }
+                  : null,
+              isLoading: state.status.isSubmissionInProgress);
+        }
     );
   }
 }
+
+
+class _GoogleSignupButton extends StatelessWidget {
+  const _GoogleSignupButton({Key? key}): super(key: key);
+  @override
+  Widget build(BuildContext context) {
+       return GoogleButton(onTap: (){} ,title:'SIGN UP WITH GOOGLE');
+       }
+}
+

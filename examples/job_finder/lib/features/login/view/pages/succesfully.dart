@@ -8,6 +8,8 @@ import 'package:job_finder/shared/theme/colors.dart';
 import 'package:job_finder/features/auth/domain/repositories/user_repository.dart';
 import 'package:job_finder/features/login/domain/bloc/login_bloc.dart';
 
+import '../../../../shared/router/routes/app_routes.dart';
+
 
 class SuccessfullyScreen extends StatelessWidget {
   const SuccessfullyScreen({super.key});
@@ -58,16 +60,16 @@ class _SuccessfullyScreenView extends StatelessWidget {
                     child: SizedBox(
                       height: 94,
                       child:
-                          SvgPicture.asset(Assets.images.forgotPassword.path),
+                          SvgPicture.asset(Assets.images.successfully.path),
                     ),
                   ),
                   const SizedBox(height: 72),
                
                   Column(
                     children: [
-                      _LoginButton(),
+                      _ContinueButton(),
                       const SizedBox(height: 19),
-                      _LoginButton(),
+                      _BackToLoginButton(),
                     ],
                   ),
                   const SizedBox(height: 16),
@@ -83,36 +85,41 @@ class _SuccessfullyScreenView extends StatelessWidget {
 }
 
 
-class _LoginButton extends StatelessWidget {
+class _ContinueButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(
-      buildWhen: (previous, current) => previous.status != current.status,
-      builder: (context, state) {
-        return SizedBox(
-          height: 50,
-          child: state.status.isSubmissionInProgress
-              ? const CircularProgressIndicator()
-              : TextButton(
-                  style: TextButton.styleFrom(
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                      foregroundColor: Colors.white,
-                      backgroundColor: AppColors.buttonBlue,
-                      minimumSize: Size(MediaQuery.of(context).size.width, 50)),
-                  onPressed: () {},
-                  // state.status.isValidated
-                  // ? () {
-                  //     context.read<LoginBloc>().add(const LoginSubmitted());
-                  //   }
-                  // : null,
-                  child: const Text('SIGN UP'),
-                ),
-        );
-      },
+    return SizedBox(
+      height: 50,
+      child: TextButton(
+        style: TextButton.styleFrom(
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5.0))),
+            foregroundColor: Colors.white,
+            backgroundColor: AppColors.buttonBlue,
+            minimumSize: Size(MediaQuery.of(context).size.width, 50)),
+        onPressed: () {},
+        child: const Text('CONTINIUE'),
+      ),
     );
   }
 }
 
-
+class _BackToLoginButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 50,
+      child: TextButton(
+        style: TextButton.styleFrom(
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5.0))),
+            foregroundColor: AppColors.buttonBlue,
+            backgroundColor: AppColors.buttonPurpleLight,
+            minimumSize: Size(MediaQuery.of(context).size.width, 50)),
+        onPressed: () => const LoginRoute().go(context),
+        child: const Text('BACK TO LOGIN'),
+      ),
+    );
+  }
+}
 
